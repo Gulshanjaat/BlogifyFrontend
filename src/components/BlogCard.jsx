@@ -5,7 +5,7 @@ function BlogCard({ blog }) {
     <div className="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition duration-300">
 
       <img
-        src={`http://localhost:2020/uploads/${blog.profile}`}
+        src={`https://blogify-0rc8.onrender.com/uploads/${blog.profile}`}
         alt={blog.title}
         className="w-full h-52 object-cover"
       />
