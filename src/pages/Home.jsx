@@ -14,24 +14,26 @@ function Home() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [selectedCategoryName, setSelectedCategoryName] = useState("All");
+  const [loading, setLoading] = useState(true);
 
   const getBlogs = async (catId = "") => {
-    try {
+  try {
+    setLoading(true);
 
-      const url = catId
-        ? `/blog?cat_id=${catId}`
-        : "/blog";
+    const url = catId
+      ? `/blog?cat_id=${catId}`
+      : "/blog";
 
-      console.log("API URL:", url);
+    const res = await api.get(url);
 
-      const res = await api.get(url);
+    setAllBlogs(res.data.data);
 
-      setAllBlogs(res.data.data);
-
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  } catch (error) {
+    console.log(error);
+  } finally {
+    setLoading(false);
+  }
+};
 
   useEffect(() => {
     getBlogs();
@@ -49,7 +51,7 @@ function Home() {
 
           <div className="max-w-6xl mx-auto text-center px-5">
 
-            <h1 className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600">
+            <h1 className="text-6xl font-bold text-transparent bg-clip-text  from-purple-600 to-blue-600">
               Discover Amazing Blogs
             </h1>
 
@@ -123,28 +125,32 @@ function Home() {
 
         {/* All Blogs */}
 
-        <section className="max-w-7xl mx-auto px-5 mt-24">
+       {loading ? (
 
-          <h2 className="text-4xl font-bold text-center mb-12">
+  <div className="text-center py-16">
 
-            {selectedCategoryName === "All"
-              ? "All Blogs"
-              : `${selectedCategoryName} Blogs`}
+    <div className="w-12 h-12 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
 
-          </h2>
+    <p className="mt-5 text-lg text-gray-500">
+      Loading Blogs...
+    </p>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+  </div>
 
-            {allBlogs.map((blog) => (
-              <BlogCard
-                key={blog._id}
-                blog={blog}
-              />
-            ))}
+) : (
 
-          </div>
+  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-        </section>
+    {allBlogs.map((blog) => (
+      <BlogCard
+        key={blog._id}
+        blog={blog}
+      />
+    ))}
+
+  </div>
+
+)}
 
         <Footer />
 

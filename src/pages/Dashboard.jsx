@@ -12,23 +12,31 @@ import {
 
 function Dashboard() {
 
+
     const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-    const getDashboard = async () => {
+   const getDashboard = async () => {
 
-        try {
+  try {
 
-            const res = await api.get("/dashboard");
+    setLoading(true);
 
-            setData(res.data);
+    const res = await api.get("/dashboard");
 
-        } catch (error) {
+    setData(res.data);
 
-            console.log(error);
+  } catch (error) {
 
-        }
+    console.log(error);
 
-    };
+  } finally {
+
+    setLoading(false);
+
+  }
+
+};
 
     useEffect(() => {
 
@@ -36,7 +44,27 @@ function Dashboard() {
 
     }, []);
 
-    if (!data) return <h2>Loading...</h2>;
+    if (loading) {
+
+  return (
+
+    <div className="flex justify-center items-center h-[70vh]">
+
+      <div className="text-center">
+
+        <div className="w-14 h-14 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+
+        <p className="mt-5 text-xl font-semibold text-purple-600">
+          Loading Dashboard...
+        </p>
+
+      </div>
+
+    </div>
+
+  );
+
+}
 
     const chartData = [
 

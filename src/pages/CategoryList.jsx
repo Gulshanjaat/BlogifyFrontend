@@ -7,6 +7,7 @@ function CategoryList() {
     const [categories, setCategories] = useState([]);
     const [editId, setEditId] = useState("");
     const [editName, setEditName] = useState("");
+    const [loading, setLoading] = useState(true);
 
     const deleteCategory = async (id) => {
 
@@ -58,27 +59,54 @@ function CategoryList() {
 
     }
 
-    const getCategory = async () => {
+   const getCategory = async () => {
+  try {
 
-        try {
+    setLoading(true);
 
-            const res = await api.get("/category");
+    const res = await api.get("/category");
 
-            setCategories(res.data.data);
+    setCategories(res.data.data);
 
-        } catch (error) {
+  } catch (error) {
 
-            console.log(error);
+    console.log(error);
 
-        }
+  } finally {
 
-    };
+    setLoading(false);
+
+  }
+};
 
     useEffect(() => {
 
         getCategory();
 
     }, []);
+
+
+    if (loading) {
+
+  return (
+
+    <div className="flex justify-center items-center h-[70vh]">
+
+      <div className="text-center">
+
+        <div className="w-14 h-14 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+
+        <p className="mt-5 text-xl font-semibold text-purple-600">
+          Loading Categories...
+        </p>
+
+      </div>
+
+    </div>
+
+  );
+
+}
 
     return (
 

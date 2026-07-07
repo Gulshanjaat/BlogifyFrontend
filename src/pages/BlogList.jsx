@@ -5,22 +5,31 @@ import { useNavigate } from "react-router-dom";
 function BlogList() {
     const [blogs, setBlogs] = useState([]);
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
 
-   const getBlogs = async (catId = "") => {
-  try {
+    const getBlogs = async (catId = "") => {
+        try {
 
-    const url = catId
-      ? `/blog?cat_id=${catId}`
-      : "/blog";
+            setLoading(true);
 
-    const res = await api.get(url);
+            const url = catId
+                ? `/blog?cat_id=${catId}`
+                : "/blog";
 
-    setBlogs(res.data.data);
+            const res = await api.get(url);
 
-  } catch (error) {
-    console.log(error);
-  }
-};
+            setBlogs(res.data.data);
+
+        } catch (error) {
+
+            console.log(error);
+
+        } finally {
+
+            setLoading(false);
+
+        }
+    };
 
     const deleteBlog = async (id) => {
         const confirmDelete = window.confirm(
@@ -42,6 +51,28 @@ function BlogList() {
         getBlogs();
     }, []);
 
+    if (loading) {
+
+        return (
+
+            <div className="flex justify-center items-center h-[70vh]">
+
+                <div className="text-center">
+
+                    <div className="w-14 h-14 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+
+                    <p className="mt-5 text-xl font-semibold text-purple-600">
+                        Loading Blogs...
+                    </p>
+
+                </div>
+
+            </div>
+
+        );
+
+    }
+
     return (
         <div>
             <div className="flex justify-between items-center mb-8">
@@ -49,7 +80,7 @@ function BlogList() {
                     Blog Management
                 </h1>
 
-               
+
             </div>
 
             <div className="overflow-x-auto bg-white  rounded-2xl shadow">
