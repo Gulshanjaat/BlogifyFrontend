@@ -15,7 +15,7 @@ function BlogList() {
 
     const res = await api.get(url);
 
-    setAllBlogs(res.data.data);
+    setBlogs(res.data.data);
 
   } catch (error) {
     console.log(error);
@@ -81,7 +81,7 @@ function BlogList() {
                                 <td className="p-4">
 
                                     <img
-                                        src={`http://localhost:2020/uploads/${blog.profile}`}
+                                        src={`https://blogify-0rc8.onrender.com/uploads/${blog.profile}`}
                                         className="w-20 h-20 rounded-lg object-cover"
                                     />
 
