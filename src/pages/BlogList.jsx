@@ -112,7 +112,7 @@ function BlogList() {
                                 <td className="p-4">
 
                                     <img
-                                        src={`https://blogify-0rc8.onrender.com/uploads/${blog.profile}`}
+                                        src={blog.profile}
                                         className="w-20 h-20 rounded-lg object-cover"
                                     />
 

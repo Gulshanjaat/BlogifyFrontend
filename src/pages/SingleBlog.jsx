@@ -53,18 +53,18 @@ function SingleBlog() {
         <div className="max-w-6xl mx-auto px-5 py-10">
 
           <img
-            src={`http://localhost:2020/uploads/${blog.profile}`}
+            src={blog.profile}
             alt={blog.title}
             className="w-full h-500px object-cover rounded-3xl shadow-lg"
           />
 
           <div className="mt-10">
-
+ 
             <span className="bg-purple-600 text-white px-4 py-2 rounded-full">
               {blog.cat_id.cat_name}
             </span>
 
-            <h1 className="text-5xl font-bold mt-6">
+            <h1 className="text-5xl font-bold mt-6"> 
               {blog.title}
             </h1>
 
