@@ -10,18 +10,17 @@ return(
 
 <Sidebar/>
 
-<div className="flex-1 min-h-screen bg-slate-100 dark:bg-slate-950">
+<div className="flex-1 min-h-screen bg-slate-100 dark:bg-slate-950 overflow-x-hidden">
 
-<MobileMenu/>
+  <MobileMenu />
 
-<div className="p-8">
+  <div className="p-4 sm:p-6 lg:p-8">
 
-<Outlet/>
+    <Outlet />
+
+  </div>
 
 </div>
-
-</div>
-
 </div>
 
 )

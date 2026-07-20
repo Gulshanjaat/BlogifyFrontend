@@ -3,15 +3,15 @@ import ThemeButton from "./ThemeButton";
 
 function Navbar() {
   return (
-    <nav className="sticky top-0 z-50 backdrop-blur-lg bg-white dark:bg-slate-900 shadow-md">
-      <div className="max-w-7xl mx-auto px-5">
+    <nav className="sticky top-0 z-40 backdrop-blur-md bg-[#09090B]/80 border-b border-zinc-800/80 shadow-sm w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
 
-          <h1 className="text-2xl font-bold text-purple-600">
+          <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight text-blue-500">
             Blogify
           </h1>
 
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-4 sm:gap-5">
 
             {/* <Link
               to="/"
@@ -22,7 +22,7 @@ function Navbar() {
 
             <Link
               to="/dashboard"
-              className="font-medium text-black dark:text-white transition"
+              className="text-sm sm:text-base font-semibold text-zinc-300 hover:text-white transition-colors duration-200"
             >
               Dashboard
             </Link>
@@ -34,8 +34,11 @@ function Navbar() {
               Admin
             </Link> */}
 
-            <ThemeButton />
+            <div className="flex items-center justify-center min-w-[40px]">
+              <ThemeButton />
+            </div>
           </div>
+
         </div>
       </div>
     </nav>
